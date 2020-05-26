@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+set -x
+
+git config --global user.email "support@revelry.co"
+git config --global user.name "CI"
+git remote add production git@git.wpengine.com:production/nightingaleweb.git
+git push production HEAD:master --force

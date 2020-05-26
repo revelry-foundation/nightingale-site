@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+set -x
+
+git config --global user.email "support@revelry.co"
+git config --global user.name "CI"
+git remote add staging git@git.wpengine.com:production/nightingalestg.git
+git push staging HEAD:master --force
