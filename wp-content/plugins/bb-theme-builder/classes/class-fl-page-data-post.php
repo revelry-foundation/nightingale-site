@@ -49,7 +49,7 @@ final class FLPageDataPost {
 
 	static public function wp_trim_words( $text, $num_words = 55, $more = null ) {
 		if ( null === $more ) {
-			$more = __( '&hellip;' );
+			$more = __( '&hellip;', 'bb-theme-builder' );
 		}
 
 		$original_text = $text;
@@ -59,7 +59,7 @@ final class FLPageDataPost {
 		* enter 'characters_excluding_spaces' or 'characters_including_spaces'. Otherwise, enter 'words'.
 		* Do not translate into your own language.
 		*/
-		if ( strpos( _x( 'words', 'Word count type. Do not translate!' ), 'characters' ) === 0 && preg_match( '/^utf\-?8$/i', get_option( 'blog_charset' ) ) ) {
+		if ( strpos( _x( 'words', 'Word count type. Do not translate!', 'bb-theme-builder' ), 'characters' ) === 0 && preg_match( '/^utf\-?8$/i', get_option( 'blog_charset' ) ) ) {
 			$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $text ), ' ' );
 			preg_match_all( '/./u', $text, $words_array );
 			$words_array = array_slice( $words_array[0], 0, $num_words + 1 );
@@ -201,15 +201,15 @@ final class FLPageDataPost {
 		} elseif ( 'alt' == $settings->display ) {
 			return get_post_meta( get_post_thumbnail_id( $post->ID ), '_wp_attachment_image_alt', true );
 		} else {
-
-			$image = get_post( get_post_thumbnail_id( $post->ID ) );
-
-			if ( 'title' == $settings->display ) {
-				return $image->post_title;
-			} elseif ( 'caption' == $settings->display ) {
-				return $image->post_excerpt;
-			} elseif ( 'description' == $settings->display ) {
-				return $image->post_content;
+			if ( get_post_thumbnail_id( $post->ID ) ) {
+				$image = get_post( get_post_thumbnail_id( $post->ID ) );
+				if ( 'title' == $settings->display ) {
+					return $image->post_title;
+				} elseif ( 'caption' == $settings->display ) {
+					return $image->post_excerpt;
+				} elseif ( 'description' == $settings->display ) {
+					return $image->post_content;
+				}
 			}
 		}
 	}
