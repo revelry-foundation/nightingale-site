@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: https://gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 2.4.17.25
+Version: 2.4.18
 Author: Gravity Forms
 Author URI: https://gravityforms.com
 License: GPL-2.0+
@@ -207,7 +207,7 @@ class GFForms {
 	 *
 	 * @var string $version The version number.
 	 */
-	public static $version = '2.4.17.25';
+	public static $version = '2.4.18';
 
 	/**
 	 * Handles background upgrade tasks.
@@ -5980,6 +5980,22 @@ if ( ! function_exists( 'gf_has_filters' ) ) {
 		}
 
 		return false;
+	}
+}
+
+if ( ! function_exists( 'gf_has_filter' ) ) {
+	/**
+	 * Determines if a callback has been registered for the specified filter.
+	 *
+	 * @since 2.4.18
+	 *
+	 * @param array         $filter            An array containing the filter tag and modifiers.
+	 * @param bool|callable $function_to_check The optional callback to check for.
+	 *
+	 * @return bool
+	 */
+	function gf_has_filter( $filter, $function_to_check = false ) {
+		return gf_has_filters( $filter, $function_to_check );
 	}
 }
 
