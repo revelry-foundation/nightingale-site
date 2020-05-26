@@ -4,8 +4,7 @@
 addons:
   ssh_known_hosts: git.wpengine.com
 
-script:
-  - bin/test
+script: skip
 
 deploy:
 -   provider: script
